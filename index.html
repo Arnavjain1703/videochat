@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <script>
+            function onVidyoClientLoaded(status)
+            {
+                console.log(status.state);
+                if(status.state == "READY")
+                {
+                    VC.CreateVidyoConnector({
+  viewId: "renderer",                            // Div ID where the composited video will be rendered, see VidyoConnector.html
+  viewStyle: "VIDYO_CONNECTORVIEWSTYLE_Default", // Visual style of the composited renderer
+  remoteParticipants: 15,                        // Maximum number of participants
+  logFileFilter: "error",
+  logFileName:"",
+  userData:""
+}).then(function(vc)
+                    {
+                               console.log("Creat Success");
+                    }).catch(function(error)
+                    {
+                        // console.error("Creat failed  " + error)
+                    });
+                }
+            }
+        </script>
+        <script src="https://static.vidyo.io/latest/javascript/VidyoClient/VidyoClient.js?onload=onVidyoClientLoaded"></script>
+        <h1>hrllpo</h1>
+        <div style="height: 700px;width: 700px;" id="renderer"></div>
+    </body>
+</html>
