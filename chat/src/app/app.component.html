@@ -4,7 +4,15 @@
   <button (click)="pause()" class="btn btn-warning">Pause</button>
   <button (click)="resume()" class="btn btn-info">Resume</button>
   <button (click)="sound()" class="btn btn-danger">Play with Sound</button>
-  <button (click)="creat()" class="btn btn-danger">creat</button>
+  <button (click)="creat()" class="btn btn-danger">send offer</button>
+  <button (click)="creatroom()" class="btn btn-danger">creatroomid</button>
+  <!-- <button (click)="server()" class="btn btn-danger">add coller to server</button> -->
+  <button (click)="check()" class="btn btn-danger">checkemit</button>
+  <button (click)="listen()" class="btn btn-danger">listen</button>
+
+
+
+
 
 </div>
 
@@ -13,6 +21,8 @@
     <div class="text-center">
       <h3>
         <video #videoElement style="height: 100px;"></video>
+        <video #rvideoElement style="height: 100px;"></video>
+
       </h3>
     </div>
   </div>
