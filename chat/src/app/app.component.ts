@@ -9,13 +9,15 @@ import { Observable, Subscriber } from 'rxjs';
 export class AppComponent implements AfterViewInit ,OnInit{
 socket:any;
 configuration = {
-iceServers: [
-{
-  urls: 
-    "stun:stun1.l.google.com:19302"
-         
-},
-],
+  iceServers: [
+    {
+      urls: [
+        'stun:stun1.l.google.com:19302',
+        'stun:stun2.l.google.com:19302',
+      ],
+    },
+  ],
+  iceCandidatePoolSize: 10,
 };
 @ViewChild('videoElement',{static:false}) videoElement: ElementRef;  
 @ViewChild('rvideoElement',{static:false}) rvideoElement: ElementRef;  
