@@ -1,13 +1,17 @@
 import { Component, ViewChild,ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { ServerService } from './services/serverService';
 import { Observable, Subscriber } from 'rxjs';
+import * as io from 'socket.io-client' 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit ,OnInit{
-socket:any;
+  socket:any
+localstream :any;
 configuration = {
   iceServers: [
     {
@@ -21,14 +25,18 @@ configuration = {
 };
 @ViewChild('videoElement',{static:false}) videoElement: ElementRef;  
 @ViewChild('rvideoElement',{static:false}) rvideoElement: ElementRef;  
-ngOnInit(){}
+ngOnInit(){
+
+ this.socket = io('https://singis.herokuapp.com/')
+ 
+}
 constructor(private ServerService:ServerService){  }
 video: any;
 video2: any;
 roomId:string;
-localStream=new MediaStream
 tk:any;
 alis = new RTCPeerConnection(this.configuration);
+bob = new RTCPeerConnection(this.configuration);
 
 ngAfterViewInit() {
 this.video = this.videoElement.nativeElement;
@@ -37,35 +45,30 @@ this.video2 = this.rvideoElement.nativeElement;
 creat()
   {  
  
-      
-  this.registerPeerConnectionListeners();
-  this.localStream.getTracks().forEach(track => {
-    this.alis.addTrack(track);
+this.registerPeerConnectionListeners();
+ 
+this.localstream.getTracks().forEach(track => {
+    this.alis.addTrack(track,this.localstream);
   });
    
     this.alis.onicecandidate= (e2)=> 
     {
-       
-         console.log(e2.candidate);
+         
+         this.ServerService.icecandidate(this.roomId,e2.candidate)
     }
-    this.alis.onicecandidateerror=(e)=>
-    {
-      console.log(e);
-    }
-    this.alis.addEventListener('icecandidate', event => {
-      if (!event.candidate) {
-        console.log('ksdjvn')
-        console.log(event)
-        console.log('Got final candidate!');
-        return;
-      }
-    })
+   
+   
     this.alis.createOffer().then(offer=>{
-    this.ServerService.socket(offer,this.roomId);this.alis.setLocalDescription(new RTCSessionDescription(offer))})
+      const roomId = this.roomId
+     
+      this.socket.emit("creat_room",JSON.stringify({offer,roomId}));
+    
+      this.alis.setLocalDescription(new RTCSessionDescription(offer))})
     // .then(()=>this.bob.setRemoteDescription(this.alis.localDescription))
     // .then(()=>this.bob.createAnswer())
-    // .then((answer)=> {this.bob.setLocalDescription(new RTCSessionDescription(answer))})
+    // .then((answer)=> {console.log(answer),this.bob.setLocalDescription(new RTCSessionDescription(answer))})
     // .then(()=>this.alis.setRemoteDescription(this.bob.localDescription))
+
      
   }
   
@@ -87,6 +90,7 @@ start() {
 
   browser.mediaDevices.getUserMedia(config).then(stream => {
     this.video.srcObject = stream;
+    this.localstream=stream
     this.video.play();
   });
 }
@@ -123,7 +127,9 @@ check()
 // {
 //   this.ServerService.listen("receive_answer_sdp").subscribe((answer)=>
 //   {
-//     this.alis.setRemoteDescription(answer)
+//        console.log(answer)
+//        const answer = new RTCSessionDescription(answer)
+//        await this.alis.setRemoteDescription(answer);
 //   }
 //   )
   
@@ -132,20 +138,20 @@ registerPeerConnectionListeners()
 {
   this.alis.onicegatheringstatechange = (e)=>
   {
-    console.log(e)
+    
   }
   this.alis.onconnectionstatechange=(e)=>
   {
-    console.log(e);
+    
   }
   this.alis.onsignalingstatechange = (e)=>
   {
-     console.log(e);
+     
   }
 
   this.alis.oniceconnectionstatechange = (e)=>
   {
-    console.log(e)
+    
   }
  
 }

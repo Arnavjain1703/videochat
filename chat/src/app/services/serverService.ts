@@ -10,7 +10,7 @@ export class ServerService
     private rootUrl = "https://singis.herokuapp.com"
 tk:any;
 sockets:any;
-message:any;
+
 
 constructor(private http:HttpClient){
     this.sockets = io('https://singis.herokuapp.com/')
@@ -22,14 +22,7 @@ creatRoom()
     return this.http.get( this.rootUrl+"/create_room");
      
 }
-socket(offer:any,roomId:string)
-{
-    
-     this.message=JSON.stringify({offer,roomId})
-     console.log(this.message)
-    this.sockets.emit("creat_room",this.message);
-  
-}
+
 // server(roomId:number)
 // {   const candidate = candidate.map 
 //     console.log(JSON.stringify({roomId,candidate}))
@@ -57,19 +50,18 @@ checkemit(roomId:string)
 }
 icecandidate(roomId:string,candidate:any)
 {
-    this.message=JSON.stringify({roomId,candidate})
-     console.log(this.message)
-    this.sockets.emit("add_caller_candidates",this.message);
+    const message=JSON.stringify({roomId,candidate})
+     this.sockets.emit("add_caller_candidates",message);
 }
 listen(eventname:string)
 {
     
     return new Observable((Subscriber)=>
     {
-        this.sockets.on(eventname,(answer)=>
+        this.sockets.on(eventname,(answer:RTCSessionDescription)=>
         {
             Subscriber.next(answer);
-             console.log('skdjcn')
+            
         })
     })
 }
