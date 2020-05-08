@@ -50,7 +50,7 @@ checkemit(roomId:string)
 }
 icecandidate(roomId:string,candidate:any)
 {
-    const message=JSON.stringify({roomId,candidate})
+    const message={roomId,candidate}
      this.sockets.emit("add_caller_candidates",message);
 }
 listen(eventname:string)

@@ -27,10 +27,10 @@ configuration = {
 @ViewChild('rvideoElement',{static:false}) rvideoElement: ElementRef;  
 ngOnInit(){
 
+this.socket = io('https://singis.herokuapp.com/')
  
 }
 constructor(private ServerService:ServerService){ 
- this.socket = io('https://singis.herokuapp.com/')
 
  }
 video: any;
@@ -55,16 +55,19 @@ this.localstream.getTracks().forEach(track => {
    
     this.alis.onicecandidate= (e2)=> 
     {
-         
-         this.ServerService.icecandidate(this.roomId,e2.candidate)
+      const roomId = this.roomId;
+      const candidate = e2.candidate   
+        //  this.ServerService.icecandidate(this.roomId,e2.candidate)
+      this.socket.emit("add_caller_candidates",({candidate,roomId}));
+
     }
    
    
     this.alis.createOffer().then(off=>{
       const roomId = this.roomId;
       const  offer= off
-      console.log(JSON.stringify({offer,roomId}))
-      this.socket.emit("creat_room",JSON.stringify({offer,roomId}));
+       console.log({offer,roomId})
+      this.socket.emit("create_room",({offer,roomId}));
     
       this.alis.setLocalDescription(new RTCSessionDescription(offer))})
     // .then(()=>this.bob.setRemoteDescription(this.alis.localDescription))
