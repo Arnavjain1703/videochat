@@ -10,7 +10,7 @@ import * as io from 'socket.io-client'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit ,OnInit{
-  socket:any
+socket:any;
 localstream :any;
 configuration = {
   iceServers: [
@@ -27,10 +27,12 @@ configuration = {
 @ViewChild('rvideoElement',{static:false}) rvideoElement: ElementRef;  
 ngOnInit(){
 
- this.socket = io('https://singis.herokuapp.com/')
  
 }
-constructor(private ServerService:ServerService){  }
+constructor(private ServerService:ServerService){ 
+ this.socket = io('https://singis.herokuapp.com/')
+
+ }
 video: any;
 video2: any;
 roomId:string;
@@ -58,9 +60,10 @@ this.localstream.getTracks().forEach(track => {
     }
    
    
-    this.alis.createOffer().then(offer=>{
-      const roomId = this.roomId
-     
+    this.alis.createOffer().then(off=>{
+      const roomId = this.roomId;
+      const  offer= off
+      console.log(JSON.stringify({offer,roomId}))
       this.socket.emit("creat_room",JSON.stringify({offer,roomId}));
     
       this.alis.setLocalDescription(new RTCSessionDescription(offer))})
