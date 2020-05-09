@@ -1,7 +1,9 @@
 import { Component, ViewChild,ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { ServerService } from './services/serverService';
-import { Observable, Subscriber } from 'rxjs';
+
 import * as io from 'socket.io-client' 
+
+
 
 
 @Component({
@@ -11,7 +13,10 @@ import * as io from 'socket.io-client'
 })
 export class AppComponent implements AfterViewInit ,OnInit{
 socket:any;
+roomref:any;
 localstream :any;
+remoteStream = new MediaStream();
+
 configuration = {
   iceServers: [
     {
@@ -28,7 +33,7 @@ configuration = {
 ngOnInit(){
 
 this.socket = io('https://singis.herokuapp.com/')
- 
+
 }
 constructor(private ServerService:ServerService){ 
 
@@ -44,6 +49,7 @@ ngAfterViewInit() {
 this.video = this.videoElement.nativeElement;
 this.video2 = this.rvideoElement.nativeElement;
 }
+ 
 creat()
   {  
  
@@ -55,11 +61,14 @@ this.localstream.getTracks().forEach(track => {
    
     this.alis.onicecandidate= (e2)=> 
     {
+      if(e2.candidate)
+      {
       const roomId = this.roomId;
       const candidate = e2.candidate   
         //  this.ServerService.icecandidate(this.roomId,e2.candidate)
       this.socket.emit("add_caller_candidates",({candidate,roomId}));
-
+      console.log(candidate)
+      }
     }
    
    
@@ -74,7 +83,24 @@ this.localstream.getTracks().forEach(track => {
     // .then(()=>this.bob.createAnswer())
     // .then((answer)=> {console.log(answer),this.bob.setLocalDescription(new RTCSessionDescription(answer))})
     // .then(()=>this.alis.setRemoteDescription(this.bob.localDescription))
+       this.alis.ontrack = (e)=>
+       {
+         e.streams[0].getTracks().forEach(track=>
+          {
+            this.remoteStream.addTrack(track)
+          })
+       }  
 
+    this.socket.on('recieve_answer_sdp', (data) => {
+      // const rtcSessionDescription = new RTCSessionDescription(data.answer);
+      this.alis.setRemoteDescription(data);
+      
+    });
+    this.socket.on('recieve_callee_candidates',(data)=>
+    {
+         this.alis.addIceCandidate(new RTCIceCandidate(data))
+         console.log('skjdjbv');
+    })
      
   }
   
@@ -98,6 +124,7 @@ start() {
     this.video.srcObject = stream;
     this.localstream=stream
     this.video.play();
+    this.video2.srcObject = this.remoteStream
   });
 }
 
@@ -118,6 +145,7 @@ creatroom()
   .subscribe((response)=>{
      
      this.roomId=String(response)
+     console.log(response)
        
   })
 }
@@ -140,6 +168,64 @@ check()
 //   )
   
 // }
+
+
+
+joinroom(f)
+{
+this.registerPeerConnectionListeners();
+
+  this.localstream.getTracks().forEach(track => {
+    this.bob.addTrack(track,this.localstream);
+  });
+  this.bob.onicecandidate=(e)=>
+  {
+    if(e.candidate)
+    {
+    const candidate = e.candidate
+    this.socket.emit("add_callee_candidates",({candidate,roomId}));
+    } 
+  }
+  this.alis.ontrack = (e)=>
+  {
+    e.streams[0].getTracks().forEach(track=>
+     {
+       this.remoteStream.addTrack(track)
+     })
+  }  
+
+  const roomId=f.value.id;
+  console.log(roomId)
+  this.socket.emit('join_room',({roomId}))
+  this.ServerService.getoffer(roomId)
+       .subscribe((response)=>
+       {
+          this.tk= response
+          console.log(response)
+         const offer = this.tk.offerSdp
+         const length=this.tk.callerCandidates.length
+         const callerCandidates  =this.tk.callerCandidates
+         console.log(callerCandidates)
+
+      const rtcSessionDescription = new RTCSessionDescription(offer);
+      this.bob.setRemoteDescription(rtcSessionDescription).then(()=>
+ {this.bob.createAnswer().then((answer)=>{this.bob.setLocalDescription(answer);this.socket.emit('add_answer_sdp',{answer,roomId});
+      for(let i=0;i<length;i++)
+      {
+        this.bob.addIceCandidate(callerCandidates[i])
+        console.log('add')
+      }
+
+}
+    )
+  
+
+ })
+
+       }
+       )
+  
+}
 registerPeerConnectionListeners()
 {
   this.alis.onicegatheringstatechange = (e)=>

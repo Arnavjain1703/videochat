@@ -66,5 +66,10 @@ listen(eventname:string)
     })
 }
 
+getoffer(roomId:string)
+{
+    const headers = new HttpHeaders({'Content-Type':'application/json'});
+    return this.http.post(this.rootUrl+'/get_room_details',JSON.stringify({roomId}), {headers:headers})
+}
 
 }

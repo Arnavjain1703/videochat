@@ -13,7 +13,6 @@
 
 
 
-
 </div>
 
 <div class="row">
@@ -27,3 +26,8 @@
     </div>
   </div>
 </div>
+
+<form (ngSubmit)="joinroom(f)" #f="ngForm">
+  <input  name="id" placeholder="roomid" ngModel required>
+  <button type="submit">joinroom</button>
+</form>
