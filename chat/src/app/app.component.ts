@@ -16,6 +16,7 @@ socket:any;
 roomref:any;
 localstream :any;
 remoteStream = new MediaStream();
+rid=false;
 
 configuration = {
   iceServers: [
@@ -124,7 +125,8 @@ start() {
     this.video.srcObject = stream;
     this.localstream=stream
     this.video.play();
-    this.video2.srcObject = this.remoteStream
+    this.video2.srcObject = this.remoteStream;
+    this.video2.play();
   });
 }
 
@@ -147,7 +149,11 @@ creatroom()
       this.roomId=String(response)
       console.log(response);
       this.creat();
+      this.rid=true;
   })
+}
+closeid() {
+  this.rid=false;
 }
 // server()
 // {

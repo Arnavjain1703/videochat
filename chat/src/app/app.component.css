@@ -1,0 +1,151 @@
+/* popup */
+/* .contain-popup {
+    position: fixed;
+    height:100vh;
+    width:100%;
+    display:none;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background-color: rgba(0,0,0,0.5);
+    z-index:500;
+} */
+/* .close-popup {
+    position: relative;
+    left:15rem;
+    top:1rem;
+}
+.close-popup-img {
+    width:5%;
+} */
+/* .card-popup {
+    background-color: #fff;
+    position:fixed;
+    top:12rem;
+    left:30rem;
+    width:30rem;
+    height:20rem;
+    padding:1.5rem 1rem 1rem 1rem;
+    overflow:auto;
+    border-radius:10px;
+    animation: appear .5s 1;
+}
+.popup-head {
+    font-family: 'Raleway', sans-serif;
+    color:#1D194F;
+} */
+
+/* Scrollbar */
+/* width */
+.card-popup::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+.card-popup::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 2px;
+}
+
+/* Handle */
+.card-popup::-webkit-scrollbar-thumb {
+    background: #696969; 
+    border-radius: 2px;
+}
+
+/* Handle on hover */
+.card-popup::-webkit-scrollbar-thumb:hover {
+    background: #696969; 
+}
+/* Scrollbar */
+
+@keyframes appear {
+    from{transform: scale(0);}
+    to{transform: scale(1);}
+}
+
+/* media queries */
+@media only screen and (max-width:1024px) {
+    .card-popup {
+        top:15rem;
+        left:16.5rem;
+    }
+}
+@media only screen and (max-width:768px) {
+    .card-popup {
+        top:15rem;
+        left:9rem;
+    }
+}
+@media only screen and (max-width:455px) {
+    .card-popup {
+        top:13rem;
+        left:4.5rem;
+        width:20rem;
+        height:22rem;
+    }
+}
+@media only screen and (max-width:430px) {
+    .card-popup {
+        top:12rem;
+        left:3.5rem;
+        width:20rem;
+        height:22rem;
+    }
+}
+@media only screen and (max-width:375px) {
+    .card-popup {
+        top:12rem;
+        left:1.8rem;
+        width:20rem;
+        height:22rem;
+    }
+}
+@media only screen and (max-width:320px) {
+    .card-popup {
+        top:12rem;
+        left:1rem;
+        width:18rem;
+        height:23rem;
+    }
+}
+/* media queries */
+
+/* popup */
+
+/* Popup */
+.popup-background {
+    position:sticky;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    width:100%;
+    height:100vh;
+    background-color:rgba(0,0,0,0.5);
+    z-index:500 !important;
+}
+.contain-popup {
+    background-color: #fff;
+    position:fixed;
+    top:12rem;
+    left:40rem;
+    width:15rem;
+    height:15rem;
+    padding:1.5rem 1rem 1rem 1rem;
+    border-radius:10px;
+    animation: appear .5s 1;
+}
+.popup-head {
+    font-family: 'Raleway', sans-serif;
+    color:#1D194F;
+}
+.roomid {
+    font-family: 'Montserrat', sans-serif;
+}
+@keyframes appear {
+    from{transform:scale(0);}
+    to{transform:scale(1);};
+}
+/* Popup */
