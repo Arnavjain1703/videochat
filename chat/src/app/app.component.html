@@ -1,33 +1,31 @@
-<div class="row">
-  <button (click)="start()" class="btn btn-primary">Play</button>
-  <button (click)="toggleControls()" class="btn btn-success">Toggle Controls</button>
-  <button (click)="pause()" class="btn btn-warning">Pause</button>
-  <button (click)="resume()" class="btn btn-info">Resume</button>
-  <button (click)="sound()" class="btn btn-danger">Play with Sound</button>
-  <button (click)="creat()" class="btn btn-danger">send offer</button>
-  <button (click)="creatroom()" class="btn btn-danger">creatroomid</button>
-  <!-- <button (click)="server()" class="btn btn-danger">add coller to server</button> -->
-  <button (click)="check()" class="btn btn-danger">checkemit</button>
-  <button (click)="listen()" class="btn btn-danger">listen</button>
-
-
-
-
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <div class="text-center">
-      <h3>
-        <video #videoElement style="height: 100px;"></video>
-        <video #rvideoElement style="height: 100px;"></video>
-
-      </h3>
+<div class="container">
+  <form (ngSubmit)="joinroom(f)" #f="ngForm">
+    <input  name="id" placeholder="roomid" ngModel required>
+    <button type="submit" class="btn btn-primary">joinroom</button>
+  </form>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center">
+        <h3>
+          <video #videoElement style="height: 100px;"></video>
+          <video #rvideoElement style="height: 100px;"></video>
+        </h3>
+      </div>
     </div>
   </div>
 </div>
 
-<form (ngSubmit)="joinroom(f)" #f="ngForm">
-  <input  name="id" placeholder="roomid" ngModel required>
-  <button type="submit">joinroom</button>
-</form>
+<div class="container">
+  <div class="row">
+    <button (click)="start()" class="btn btn-primary">Start Video</button>
+    <!-- <button (click)="toggleControls()" class="btn btn-success">Toggle Controls</button> -->
+    <!-- <button (click)="pause()" class="btn btn-warning">Pause</button> -->
+    <!-- <button (click)="resume()" class="btn btn-info">Resume</button> -->
+    <!-- <button (click)="sound()" class="btn btn-danger">Play with Sound</button> -->
+    <!-- <button (click)="creat()" class="btn btn-danger">send offer</button> -->
+    <button (click)="creatroom()" class="btn btn-danger">creatroomid</button>
+    <!-- <button (click)="server()" class="btn btn-danger">add coller to server</button> -->
+    <!-- <button (click)="check()" class="btn btn-danger">checkemit</button> -->
+    <!-- <button (click)="listen()" class="btn btn-danger">listen</button> -->
+  </div>
+</div>
