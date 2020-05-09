@@ -192,7 +192,7 @@ this.registerPeerConnectionListeners();
     this.socket.emit("add_callee_candidates",({candidate,roomId}));
     } 
   }
-  this.alis.ontrack = (e)=>
+  this.bob.ontrack = (e)=>
   {
     e.streams[0].getTracks().forEach(track=>
      {
