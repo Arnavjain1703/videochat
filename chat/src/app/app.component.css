@@ -1,41 +1,11 @@
-/* popup */
-/* .contain-popup {
-    position: fixed;
+.e-container {
+    background-color: #0b0c10;
     height:100vh;
-    width:100%;
-    display:none;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    background-color: rgba(0,0,0,0.5);
-    z-index:500;
-} */
-/* .close-popup {
-    position: relative;
-    left:15rem;
-    top:1rem;
 }
-.close-popup-img {
-    width:5%;
-} */
-/* .card-popup {
-    background-color: #fff;
-    position:fixed;
-    top:12rem;
-    left:30rem;
-    width:30rem;
-    height:20rem;
-    padding:1.5rem 1rem 1rem 1rem;
-    overflow:auto;
-    border-radius:10px;
-    animation: appear .5s 1;
-}
-.popup-head {
+.head {
     font-family: 'Raleway', sans-serif;
-    color:#1D194F;
-} */
-
+    color:#66fcf1;
+}
 /* Scrollbar */
 /* width */
 .card-popup::-webkit-scrollbar {
@@ -127,25 +97,73 @@
     z-index:500 !important;
 }
 .contain-popup {
-    background-color: #fff;
+    background-color: #1f2833;
     position:fixed;
     top:12rem;
     left:40rem;
     width:15rem;
     height:15rem;
     padding:1.5rem 1rem 1rem 1rem;
-    border-radius:10px;
+    border-radius:0px;
+    border:1px solid #66fcf1;
     animation: appear .5s 1;
 }
 .popup-head {
     font-family: 'Raleway', sans-serif;
-    color:#1D194F;
+    color:#66fcf1;
 }
 .roomid {
     font-family: 'Montserrat', sans-serif;
+    color:#c5c6c7;
+}
+.ok {
+    font-family: 'Montserrat', sans-serif;
+    background-color:transparent;
+    border:1px solid #66fcf1;
+    color:#c5c6c7;
+    border-radius:0;
+    padding:.2rem 3rem;
+}
+.ok:hover {
+    color:#1f2833;
+    background-color: #66fcf1;
+    transition:0.3s all ease-in-out;
+}
+.startbtn {
+    font-family: 'Montserrat', sans-serif;
+    background-color:#66fcf1;
+    border:0;
+    color:#1f2833;
+    border-radius:0;
+    padding:.2rem 3rem;
+    margin-right:1rem;
+}
+.roombtn {
+    font-family: 'Montserrat', sans-serif;
+    background-color:#45a29e;
+    border:0;
+    color:#1f2833;
+    border-radius:0;
+    padding:.2rem 2rem;
+    margin-left:1rem;
+}
+.roominput {
+    border:1px solid #66fcf1;
+    background-color:transparent;
+    color:#c5c6c7;
+    border-radius:0;
 }
 @keyframes appear {
     from{transform:scale(0);}
     to{transform:scale(1);};
 }
 /* Popup */
+
+/* controls */
+.controls {
+    /* background-color:rgb(197, 198, 199,.2); */
+}
+.btn:focus {
+    outline:none;
+}
+/* controls */
