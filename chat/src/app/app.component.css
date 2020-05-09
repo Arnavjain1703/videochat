@@ -19,7 +19,7 @@
 .close-popup-img {
     width:5%;
 } */
-.card-popup {
+/* .card-popup {
     background-color: #fff;
     position:fixed;
     top:12rem;
@@ -34,7 +34,7 @@
 .popup-head {
     font-family: 'Raleway', sans-serif;
     color:#1D194F;
-}
+} */
 
 /* Scrollbar */
 /* width */
@@ -126,7 +126,6 @@
     background-color:rgba(0,0,0,0.5);
     z-index:500 !important;
 }
-/* error */
 .contain-popup {
     background-color: #fff;
     position:fixed;
@@ -149,4 +148,4 @@
     from{transform:scale(0);}
     to{transform:scale(1);};
 }
-/* error */
+/* Popup */
