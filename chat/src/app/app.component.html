@@ -1,7 +1,10 @@
 <div class="container">
   <form (ngSubmit)="joinroom(f)" #f="ngForm">
-    <input  name="id" placeholder="roomid" ngModel required>
-    <button type="submit" class="btn btn-primary">joinroom</button>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Room ID</label>
+      <input type="password" name="id" class="form-control" ngModel required placeholder="e.g. : 5669">
+    </div>
+    <button type="submit" class="btn btn-primary">Join Room</button>
   </form>
   <div class="row">
     <div class="col-md-12">
@@ -23,9 +26,34 @@
     <!-- <button (click)="resume()" class="btn btn-info">Resume</button> -->
     <!-- <button (click)="sound()" class="btn btn-danger">Play with Sound</button> -->
     <!-- <button (click)="creat()" class="btn btn-danger">send offer</button> -->
-    <button (click)="creatroom()" class="btn btn-danger">creatroomid</button>
+    <button (click)="creatroom()" class="btn btn-danger">Create Room ID</button>
     <!-- <button (click)="server()" class="btn btn-danger">add coller to server</button> -->
     <!-- <button (click)="check()" class="btn btn-danger">checkemit</button> -->
     <!-- <button (click)="listen()" class="btn btn-danger">listen</button> -->
   </div>
 </div>
+
+<!-- popup -->
+<!-- <div class="contain-popup">
+  <div class="card-popup sec_text">
+    <h2 class="text-center popup-head">Room ID</h2>
+    <hr style="border:.5px solid #FCCB67;margin:1rem 2rem;">
+    <p class="text-center mt-3">
+      {{ roomId }}
+    </p>
+  </div>
+</div> -->
+<!-- popup -->
+
+<!-- error -->
+<div *ngIf=rid class="popup-background">
+  <div class="contain-popup">
+    <h2 class="text-center popup-head">Room ID</h2>
+    <hr style="border:.5px solid #FCCB67;margin:1rem 2rem;">
+    <h3 class="text-center roomid mt-4">{{ roomId }}</h3>
+    <div class="text-center">
+      <button class="btn btn-primary mt-4" (click)=closeid()>OK</button>
+    </div>
+  </div>
+</div>
+<!-- error -->
