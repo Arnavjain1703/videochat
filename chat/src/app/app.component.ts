@@ -98,8 +98,8 @@ this.localstream.getTracks().forEach(track => {
     });
     this.socket.on('recieve_callee_candidates',(data)=>
     {
-         this.alis.addIceCandidate(new RTCIceCandidate(data))
-         console.log('skjdjbv');
+        this.alis.addIceCandidate(new RTCIceCandidate(data))
+        console.log('skjdjbv');
     })
      
   }
@@ -144,9 +144,9 @@ creatroom()
   this.ServerService.creatRoom()
   .subscribe((response)=>{
      
-     this.roomId=String(response)
-     console.log(response)
-       
+      this.roomId=String(response)
+      console.log(response);
+      this.creat();
   })
 }
 // server()
