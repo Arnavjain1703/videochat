@@ -105,7 +105,6 @@
     height:15rem;
     padding:1.5rem 1rem 1rem 1rem;
     border-radius:0px;
-    border:1px solid #66fcf1;
     animation: appear .5s 1;
 }
 .popup-head {
@@ -163,7 +162,7 @@
 .controls {
     /* background-color:rgb(197, 198, 199,.2); */
 }
-.btn:focus {
-    outline:none;
+.mybtn:focus {
+    outline:none !important;
 }
 /* controls */

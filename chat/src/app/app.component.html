@@ -2,9 +2,10 @@
   <div class="container">
     <div class="mx-auto text-center">
       <h2 class="head">JoinChat</h2>
+      <img src="../assets/images/jc-logo.png" style="width:10%" alt="logo">
     </div>
   </div>
-  <div class="container">
+  <div class="container mt-5">
     <div class="row">
       <div class="col-md-12">
         <div class="text-center">
@@ -20,13 +21,13 @@
   <div class="container-fluid">
     <div class="row">
       <div class="controls mx-auto text-center">
-        <button (click)="start()" class="btn startbtn">Start Video</button>
+        <button (click)="start()" class="mybtn startbtn">Start Video</button>
         <!-- <button (click)="toggleControls()" class="btn btn-success">Toggle Controls</button> -->
         <!-- <button (click)="pause()" class="btn btn-warning">Pause</button> -->
         <!-- <button (click)="resume()" class="btn btn-info">Resume</button> -->
         <!-- <button (click)="sound()" class="btn btn-danger">Play with Sound</button> -->
         <!-- <button (click)="creat()" class="btn btn-danger">send offer</button> -->
-        <button (click)="creatroom()" class="btn roombtn">Create Room ID</button>
+        <button (click)="creatroom()" class="mybtn roombtn">Create Room ID</button>
         <!-- <button (click)="server()" class="btn btn-danger">add coller to server</button> -->
         <!-- <button (click)="check()" class="btn btn-danger">checkemit</button> -->
         <!-- <button (click)="listen()" class="btn btn-danger">listen</button> -->
@@ -38,7 +39,7 @@
               <input type="text" name="id" class="form-control roominput" ngModel required placeholder="e.g. : 5669">
             </div>
           </div>
-          <button type="submit" class="btn btn-primary ok">Join Room</button>
+          <button type="submit" class="mybtn ok">Join Room</button>
         </form>
       </div>
     </div>
@@ -63,7 +64,7 @@
       <hr style="border:.5px solid #45a29e;margin:1rem 2rem;">
       <h3 class="text-center roomid mt-4">{{ roomId }}</h3>
       <div class="text-center">
-        <button class="btn btn-primary ok mt-4" (click)=closeid()>OK</button>
+        <button class="mybtn ok mt-4" (click)=closeid()>OK</button>
       </div>
     </div>
   </div>

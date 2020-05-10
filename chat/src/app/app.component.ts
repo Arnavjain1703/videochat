@@ -113,7 +113,8 @@ start() {
   this.initCamera({ video: true, audio: true });
 }
 
-  initCamera(config:any) {
+// get access to media
+initCamera(config:any) {
   var browser = <any>navigator;
 
   browser.getUserMedia = (browser.getUserMedia ||
